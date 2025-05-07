@@ -1,9 +1,5 @@
 # EX 4 : ELLIPSE DRAWING ALGORITHM
 
-NAME : MOHAMED NIZAMUDDIN A
-
-REG NO: 212224040194
-
 **AIM :**
 
 
@@ -38,85 +34,100 @@ Step 7 : stop.
 **Program :**
 
 ```
-#include "stdio.h" 
-#include "conio.h" 
-#include "math.h" 
-#include "graphics.h" 
-main() 
-{ 
-  int gd=DETECT,gm; 
-  int xcenter,ycenter,rx,ry; 
-  int p,x,y,px,py,rx1,ry1,rx2,ry2; 
-  initgraph(&gd,&gm,"c:\\turboc3\\bgi");
-  printf("Enter The Radius Value:\n"); 
-  scanf("%d%d",&rx,&ry); 
-  printf("Enter The xcenter and ycenter Values:\n"); 
-  scanf("%d%d",&xcenter,&ycenter); 
-  ry1=ry*ry; 
-  rx1=rx*rx; 
-  ry2=2*ry1; 
-  rx2=2*rx1; 
-x=0; 
-  y=ry; 
-  plotpoints(xcenter,ycenter,x,y); 
-  p=(ry1-rx1*ry+(0.25*rx1)); 
-  px=0; 
-  py=rx2*y; 
-  while(px<py) 
-  { 
-   x=x+1; 
-   px=px+ry2; 
-   if(p>=0) 
-    y=y-1; 
-    py=py-rx2; 
- 
- 
-    if(p<0) 
-     p=p+ry1+px; 
-    else 
-     p=p+ry1+px-py; 
-  plotpoints(xcenter,ycenter,x,y); 
- 
- 
- 
- 
- 
-p=(ry1*(x+0.5)*(x+0.5)+rx1*(y-1)*(y-1)-rx1*ry1);
-while(y>0)
-  { 
-   y=y-1; 
-   py=py-rx2; 
-   if(p<=0) 
-   { 
-    x=x+1; 
-    px=px+ry2; 
-            } 
-                     if(p>0) 
-    p=p+rx1-py; 
-   else 
-    p=p+rx1-py+px; 
-               plotpoints(xcenter,ycenter,x,y); 
-          } 
-      } 
-  getch(); 
-  return(0); 
-            } 
- 
-int plotpoints(int xcenter,int ycenter,int x,int y) 
-{ 
-  putpixel(xcenter+x,ycenter+y,6); 
-  putpixel(xcenter-x,ycenter+y,6); 
-  putpixel(xcenter+x,ycenter-y,6); 
-  putpixel(xcenter-x,ycenter-y,6);
-  return 0;
- 
+Developed By: Simon Malachi S
+Register no: 212224040318
+```
+```
+#include <graphics.h>
+#include <stdio.h>
+#include <math.h>
+#include <conio.h>
+
+// Function prototype
+void plotpoints(int xcenter, int ycenter, int x, int y);
+
+int main() {
+    int gd = DETECT, gm;
+    int xcenter, ycenter, rx, ry;
+    int x, y;
+    float rx2, ry2, p1, p2;
+    float dx, dy;
+
+    initgraph(&gd, &gm, "C:\\Turboc3\\BGI");
+
+    printf("Enter the radius values (rx ry): ");
+    scanf("%d%d", &rx, &ry);
+
+    printf("Enter the center coordinates (xcenter ycenter): ");
+    scanf("%d%d", &xcenter, &ycenter);
+
+    x = 0;
+    y = ry;
+
+    rx2 = rx * rx;
+    ry2 = ry * ry;
+
+    dx = 2 * ry2 * x;
+    dy = 2 * rx2 * y;
+
+    // Region 1
+    p1 = ry2 - (rx2 * ry) + (0.25 * rx2);
+    while (dx < dy) {
+        plotpoints(xcenter, ycenter, x, y);
+        x++;
+        dx = 2 * ry2 * x;
+
+        if (p1 < 0) {
+            p1 = p1 + dx + ry2;
+        } else {
+            y--;
+            dy = 2 * rx2 * y;
+            p1 = p1 + dx - dy + ry2;
+        }
+
+        delay(10);
+    }
+
+    // Region 2
+    p2 = (ry2 * (x + 0.5) * (x + 0.5)) + (rx2 * (y - 1) * (y - 1)) - (rx2 * ry2);
+    while (y >= 0) {
+        plotpoints(xcenter, ycenter, x, y);
+        y--;
+        dy = 2 * rx2 * y;
+
+        if (p2 > 0) {
+            p2 = p2 - dy + rx2;
+        } else {
+            x++;
+            dx = 2 * ry2 * x;
+            p2 = p2 + dx - dy + rx2;
+        }
+
+        delay(10);
+    }
+
+    getch();
+    closegraph();
+    return 0;
 }
+void plotpoints(int xcenter, int ycenter, int x, int y) {
+    putpixel(xcenter + x, ycenter + y, WHITE);
+    putpixel(xcenter - x, ycenter + y, WHITE);
+    putpixel(xcenter + x, ycenter - y, WHITE);
+    putpixel(xcenter - x, ycenter - y, WHITE);
+}
+
 ```
 
 
 **Output :**
 
-![ellipsegamedevlopment](https://github.com/user-attachments/assets/51b06629-23d3-4109-91e3-f236dba53d95)
+![image](https://github.com/user-attachments/assets/b623d75a-7abd-49e6-ba30-b077ab45b4ae)
+
+
+![Screenshot 2025-05-07 110219](https://github.com/user-attachments/assets/aad8b2f0-2f63-4880-80b8-06a0cc7684d2)
+
+
 
 
 **Result :**
